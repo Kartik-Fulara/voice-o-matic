@@ -13,11 +13,15 @@ struct SystemTrayPayload {
 fn change_app_window(app_handler: tauri::AppHandle, event: String) {
     let main_window = app_handler.get_window("main").unwrap();
 
+    print!("Event: {}", event);
+
     if event == "quit" {
+        println!("Quitting");
         main_window.close().unwrap();
     }
 
     if event == "minimize" {
+        println!("Minimize");
         main_window.hide().unwrap();
         app_handler
             .tray_handle()
@@ -27,10 +31,12 @@ fn change_app_window(app_handler: tauri::AppHandle, event: String) {
     }
 
     if event == "maximize" {
+        println!("Maximize");
         main_window.maximize().unwrap();
     }
     if event == "unmaximize" {
-        main_window.unmaximize().unwrap();
+        println!("Unmaximize");
+        main_window.unmaximize().unwrap()
     }
 }
 

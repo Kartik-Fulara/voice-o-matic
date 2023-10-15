@@ -21,7 +21,7 @@
 }
 
 .topSideBar,
-.bottomSideBar{
+.bottomSideBar {
     @apply outline-[1px] outline-white sm:outline-none
 }
 
@@ -35,6 +35,10 @@
 
 .windowBarLeft {
     @apply flex flex-row items-center h-navbarHeight w-full sm:hidden gap-2;
+}
+
+.windowBarHeading {
+    @apply bg-transparent sm:bg-raisinBlack
 }
 
 .collectionCard {
