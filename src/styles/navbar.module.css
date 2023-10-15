@@ -1,0 +1,39 @@
+.navBar{
+    @apply w-full min-h-navbarHeight flex flex-row items-center justify-between;
+    -webkit-app-region: drag;
+}
+
+
+.windowBarLeft {
+    @apply flex flex-row items-center h-full w-sideBarWidth bg-raisinBlack sm:bg-transparent pl-5 pt-4 gap-2;
+}
+
+.windowBarHeading {
+    @apply select-none font-bold text-[16px] text-white;
+}
+
+.windowBarRight {
+    @apply flex flex-row items-center justify-center h-full;
+}
+
+
+.windowControlsWrapper {
+    @apply flex flex-row items-center justify-center h-full pt-2 pr-2;
+}
+
+.windowControl {
+    @apply h-full w-[45px] hover:text-white flex items-center justify-center rounded-none text-slate-400 hover:bg-transparent focus-visible:outline-none focus-visible:ring-green-500 focus-visible:ring-offset-0;
+}
+
+.closeIcon {
+    @apply hover:text-red-700 focus-visible:outline-none focus-visible:ring-red-500 focus-visible:ring-offset-0;
+}
+
+
+.checkBoxWrapper {
+    @apply flex gap-[5px] items-center ml-[10px];
+}
+
+.dialogFooterContainer {
+    @apply flex flex-col sm:flex-col md:flex-col gap-[10px];
+}

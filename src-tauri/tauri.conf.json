@@ -1,0 +1,172 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "yarn run build",
+    "beforeDevCommand": "yarn run dev",
+    "devPath": "http://localhost:6969",
+    "distDir": "../out"
+  },
+  "package": {
+    "productName": "voice-o-matic",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "shell": {
+        "sidecar": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "../bin/testing-ss",
+            "sidecar": true
+          },
+          {
+            "name": "../bin/tts",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "../bin/ffmpeg",
+            "sidecar": true
+          },
+          {
+            "name": "../bin/ffprob",
+            "sidecar": true
+          }
+        ]
+      },
+      "window": {
+        "all": true
+      },
+      "clipboard": {
+        "all": false,
+        "readText": false,
+        "writeText": false
+      },
+      "fs": {
+        "all": true,
+        "copyFile": true,
+        "createDir": true,
+        "exists": true,
+        "readDir": true,
+        "readFile": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "scope": [
+          "$APP/*",
+          "$DOCUMENT/*",
+          "$DOWNLOAD/*",
+          "$APPDATA/*"
+        ],
+        "writeFile": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": [
+          "https://res.cloudinary.com/duv59yta1/video/upload/*"
+        ]
+      },
+      "notification": {
+        "all": true
+      },
+      "path": {
+        "all": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": [
+          "**"
+        ]
+      },
+      "dialog": {
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [
+        "../bin/testing-ss",
+        "../bin/tts",
+        "../bin/ffmpeg",
+        "../bin/ffprobe"
+      ],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.voice-o-matic.app",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "dangerousDisableAssetCspModification": false,
+      "dangerousRemoteDomainIpcAccess": [],
+      "dangerousUseHttpScheme": false,
+      "freezePrototype": false
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "title": "Voice-o-Matic",
+        "label": "main",
+        "minWidth": 1000,
+        "minHeight": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": false,
+        "url": "index.html"
+      },
+      {
+        "title": "Matic Experience",
+        "label": "maticExperience",
+        "maxWidth": 600,
+        "maxHeight": 600,
+        "minWidth": 600,
+        "minHeight": 600,
+        "resizable": false,
+        "fullscreen": false,
+        "decorations": false,
+        "url": "matic-experience",
+        "transparent": false,
+        "alwaysOnTop": true,
+        "visible": false,
+        "center": true,
+        "skipTaskbar": true
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": true,
+      "title": "Voice-o-Matic"
+    }
+  }
+}

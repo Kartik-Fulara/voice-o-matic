@@ -1,0 +1,46 @@
+.sidebar {
+    @apply w-sideBarWidth bg-raisinBlack fixed shadow-lg bottom-0 h-full sm:h-sideBarHeight -left-full sm:left-0 pt-2 pb-4 px-5 flex justify-between flex-col transition-[left] duration-500 z-50 border-r-[0.5px] border-white sm:border-r-0;
+}
+
+
+.sidebarOn {
+    @apply left-0 transition-[left] duration-500;
+}
+
+.sidebarOn::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: background-color 0.5s ease-in-out;
+    @apply sm:hidden
+}
+
+.topSideBar,
+.bottomSideBar{
+    @apply outline-[1px] outline-white sm:outline-none
+}
+
+.topSideBar {
+    @apply overflow-y-auto overflow-x-hidden;
+}
+
+.bottomSideBar {
+    @apply flex flex-col items-center gap-4;
+}
+
+.windowBarLeft {
+    @apply flex flex-row items-center h-navbarHeight w-full sm:hidden gap-2;
+}
+
+.collectionCard {
+    @apply flex flex-row items-center justify-center hover:ring-2 hover:ring-green-500 hover:ring-offset-0 focus-visible:ring-green-600 bg-white/10 backdrop-blur-lg relative;
+}
+
+.collectionCardSelected {
+    @apply ring-green-500 ring-2 bg-black backdrop-blur-0;
+}
