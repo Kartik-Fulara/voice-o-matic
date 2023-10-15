@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Command, open } from '@tauri-apps/api/shell'
 import { useCollectionContext } from '@hooks/collectionContextHook';
-import ContentNavbar from '@/components/ContentNavbar';
 import Content from '@/components/Content/Content';
 import Collection from '@/components/Content/Collection/Collection';
 import Navbar from '@/components/NavBar';
@@ -17,6 +16,8 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { getData, saveStore, setData, setDefaultData, defaultData } from '@/helper/handleStore';
 import { useAudioContext } from "@hooks/audioContextHook"
 import { initialStateType } from "@typings/collectionTypes.d"
+import dynamic from 'next/dynamic';
+const ContentNavbar = dynamic(()=> import('@/components/ContentNavbar'),{ ssr: false })
 
 export default function Page() {
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function Page() {
 
   const startPython = async () => {
     setChecking(true)
-    const command = Command.sidecar('../bin/testing-ss')
+    const command = Command.sidecar('../bin/audio-devices')
     const output = await command.execute()
 
     setAudioDevices(JSON.parse(output.stdout))
@@ -131,7 +132,7 @@ export default function Page() {
     // let baseUrl = localStorage.getItem("BASE_DIR");
     // console.log(baseUrl)
     console.log(audioState.downloadingAudio)
-  }, [audioState.downloadingAudio])
+  }, [audioState])
 
   return (
     <>

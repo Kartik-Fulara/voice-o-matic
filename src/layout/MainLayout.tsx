@@ -12,8 +12,7 @@ interface MainLayoutProps {
 const MainLayout = ({
     children
 }: MainLayoutProps) => {
-
-
+    
     useEffect(() => {
         // localStorage.setItem("BASE_DIR", `${appDataDir}`)
         const isExist = async () => {

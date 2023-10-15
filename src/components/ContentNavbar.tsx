@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { useAudioContext } from "@hooks/audioContextHook"
 import handleTTS from '@/helper/handleTTS'
 import { Progress } from './ui/progress'
+import downloadFiles from '@/helper/downloadFiles'
 
 
 type contentNavBarProps = {
