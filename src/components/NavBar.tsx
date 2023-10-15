@@ -75,10 +75,14 @@ const Navbar = ({
     const { state: {
         maximize,
         rememberSelect,
-        
-    },  setRememberSelect,setMaximize } = useWindowsContext()
+
+    }, setRememberSelect, setMaximize } = useWindowsContext()
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    useEffect(() => {
+        console.log("maximize", maximize)
+    }, [maximize])
 
     let iconSize = 20;
 
@@ -87,20 +91,14 @@ const Navbar = ({
         if (maximize) {
             invoke("change_app_window", {
                 event: "unmaximize"
-            }).then(() => {
-                setMaximize(false)
-            }).catch((err) => {
-                console.log(err)
             })
+            setMaximize(false)
         }
         else {
             invoke("change_app_window", {
                 event: "maximize"
-            }).then(() => {
-                setMaximize(true)
-            }).catch((err) => {
-                console.log(err)
             })
+            setMaximize(true)
         }
     }
 

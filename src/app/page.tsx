@@ -131,7 +131,7 @@ export default function Page() {
     // let baseUrl = localStorage.getItem("BASE_DIR");
     // console.log(baseUrl)
     console.log(audioState.downloadingAudio)
-  }, [audioState.downloadingAudio])
+  }, [audioState])
 
   return (
     <>

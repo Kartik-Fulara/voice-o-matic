@@ -13,6 +13,8 @@ const reducer = (
       return { ...state, rememberSelect: action.payload };
     case WINDOWS_ACTIONS_TYPES.TOGGLE_CHANGE_COLLECTION:
       return { ...state, changeCollection: !state.changeCollection };
+    case WINDOWS_ACTIONS_TYPES.TOGGLE_MAXIMIZE:
+      return { ...state, maximize: action.payload };
     default:
       return state;
   }
