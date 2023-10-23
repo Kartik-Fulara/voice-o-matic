@@ -9,10 +9,10 @@ TEXT = "Hello World!"
 VOICE = "en-GB-SoniaNeural"
 OUTPUT_FILE = "test.mp3"
 
-# arg1 = sys.argv[1]
-# OUTPUT_DEVICE = int(sys.argv[1])
-OUTPUT_DEVICE = 10
-# TEXT = sys.argv[2]
+arg1 = sys.argv[1]
+OUTPUT_DEVICE = int(sys.argv[1])
+# OUTPUT_DEVICE = 10
+TEXT = sys.argv[2]
 print("Running", OUTPUT_DEVICE, TEXT)   
 
 
