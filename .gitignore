@@ -38,3 +38,6 @@ next-env.d.ts
 
 # remove only rough files
 rough.*
+
+# reject exe files
+*.exe
