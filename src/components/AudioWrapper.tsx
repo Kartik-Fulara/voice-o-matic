@@ -1,6 +1,6 @@
 "use client"
 import { AudioWrapperType } from '@/typings/globals'
-
+import { convertFileSrc } from '@tauri-apps/api/tauri'
 
 import React from 'react'
 
@@ -77,28 +77,26 @@ const AudioWrapper = ({
     }
 
     return (
-        <>
-            <audio
-                key={playingAudio}
-                src={playingAudio}
-                autoPlay
-                hidden
+        <audio
+            key={playingAudio}
+            src={convertFileSrc(playingAudio)}
+            autoPlay
+            hidden
 
-                onLoadedMetadata={(e) => {
-                    setDurationTimeHandler(e)
-                }}
-                onTimeUpdate={(e) => {
-                    setCurrentTimeHandler(e)
-                }}
-                onEnded={() => {
-                    setAudioTime({
-                        ...audioTime,
-                        currentTime: `${(Number(audioTime.duration) / 3600) > 0 ? "00:00:00" : "00:00"}`,
-                    })
-                    removePlayingAudio()
-                }}
-            />
-        </>
+            onLoadedMetadata={(e) => {
+                setDurationTimeHandler(e)
+            }}
+            onTimeUpdate={(e) => {
+                setCurrentTimeHandler(e)
+            }}
+            onEnded={() => {
+                setAudioTime({
+                    ...audioTime,
+                    currentTime: `${(Number(audioTime.duration) / 3600) > 0 ? "00:00:00" : "00:00"}`,
+                })
+                removePlayingAudio()
+            }}
+        />
     )
 }
 

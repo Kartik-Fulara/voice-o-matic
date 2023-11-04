@@ -7,11 +7,14 @@ import { Button } from '@components/ui/button'
 
 import MaticExperienceNavBar from "@components/MaticExperienceNavBar"
 import handleTTS from '@/helper/handleTTS'
+import dynamic from 'next/dynamic'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@components/ui/tooltip';
-import speakAudio from '@/helper/speakAudio';
+import handleTextToTalk from '@/helper/handleClickToTalk';
 import { Label } from '@components/ui/label';
-import AudioWrapper from '@components/AudioWrapper';
+const AudioWrapper = dynamic(() => import('@/components/AudioWrapper'), {
+    ssr: false,
+})
 import { getData } from '@/helper/handleStore'
 
 let audioTimeInit = {
@@ -62,60 +65,56 @@ const Page = () => {
                     {collectionItems.map((item: any) => {
                         return (
                             <div key={item.audioUrl} className='flex items-center justify-center gap-3'>
-                                <>
-                                    {(audioTime?.duration !== `00` && playingAudio === (item.audioUrl || item.downloadUrl)) && <div className='flex gap-2 items-center'>
-                                        <span>
-                                            {audioTime?.currentTime}
-                                        </span>
-                                        <span>
-                                            /
-                                        </span>
-                                        <span>
-                                            {audioTime?.duration}
-                                        </span>
-                                    </div>}
-                                    <TooltipProvider>
+                                {(audioTime?.duration !== `00` && playingAudio === (item.audioUrl || item.downloadUrl)) && <div className='flex gap-2 items-center'>
+                                    <span>
+                                        {audioTime?.currentTime}
+                                    </span>
+                                    <span>
+                                        /
+                                    </span>
+                                    <span>
+                                        {audioTime?.duration}
+                                    </span>
+                                </div>}
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger onClick={() => handleTextToTalk({ audioPath: item.audioUrl as string })}>
+                                            <Speech size={18} className='text-slate-300 hover:text-green-700' />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            Speak {item.name} Audio
+                                        </TooltipContent>
+                                    </Tooltip>
+
+                                    {playingAudio === "" && (<Tooltip>
+                                        <TooltipTrigger onClick={() => {
+                                            if (item.audioUrl === "") {
+                                                setPlayingAudio(item.downloadUrl as string)
+                                                return
+                                            } else {
+                                                setPlayingAudio(item.audioUrl as string)
+                                            }
+                                        }}>
+                                            <Play size={18} className='text-slate-300 hover:text-green-500' />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            Play {item.name} Audio
+                                        </TooltipContent>
+                                    </Tooltip>
+                                    )}
+                                    {playingAudio === (item.audioUrl || item.downloadUrl) && (
                                         <Tooltip>
-                                            <TooltipTrigger onClick={() => speakAudio(item.audioUrl as string)}>
-                                                <Speech size={18} className='text-slate-300 hover:text-green-700' />
+                                            <TooltipTrigger onClick={() => {
+                                                setPlayingAudio("")
+                                            }}>
+                                                <Pause size={18} className='text-slate-300 hover:text-yellow-500' />
                                             </TooltipTrigger>
                                             <TooltipContent>
-                                                Speak {item.name} Audio
+                                                Pause {item.name} Audio
                                             </TooltipContent>
                                         </Tooltip>
-
-                                        {playingAudio === "" && (<>
-                                            <Tooltip>
-                                                <TooltipTrigger onClick={() => {
-                                                    if (item.audioUrl === "") {
-                                                        setPlayingAudio(item.downloadUrl as string)
-                                                        return
-                                                    } else {
-                                                        setPlayingAudio(item.audioUrl as string)
-                                                    }
-                                                }}>
-                                                    <Play size={18} className='text-slate-300 hover:text-green-500' />
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    Play {item.name} Audio
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </>
-                                        )}
-                                        {playingAudio === (item.audioUrl || item.downloadUrl) && (
-                                            <Tooltip>
-                                                <TooltipTrigger onClick={() => {
-                                                    setPlayingAudio("")
-                                                }}>
-                                                    <Pause size={18} className='text-slate-300 hover:text-yellow-500' />
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    Pause {item.name} Audio
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        )}
-                                    </TooltipProvider>
-                                </>
+                                    )}
+                                </TooltipProvider>
                             </div>
                         )
                     })

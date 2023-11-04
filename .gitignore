@@ -32,12 +32,12 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
 
 /bin/*
 
 # remove only rough files
 rough.*
-
+rough/**/*
 # reject exe files
 *.exe

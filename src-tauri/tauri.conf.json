@@ -32,6 +32,11 @@
           {
             "name": "../bin/ffprob",
             "sidecar": true
+          },
+          {
+            "name": "../bin/click-to-talk.exe",
+            "sidecar": true,
+            "args": true
           }
         ]
       },
@@ -68,7 +73,9 @@
       "http": {
         "all": true,
         "request": true,
-        "scope": ["https://res.cloudinary.com/duv59yta1/video/upload/*"]
+        "scope": [
+          "https://res.cloudinary.com/duv59yta1/video/upload/*"
+        ]
       },
       "notification": {
         "all": true
@@ -78,7 +85,9 @@
       },
       "protocol": {
         "asset": true,
-        "assetScope": ["**"]
+        "assetScope": [
+          "**"
+        ]
       },
       "dialog": {
         "open": true
@@ -94,6 +103,7 @@
       "externalBin": [
         "../bin/audio-devices",
         "../bin/text-to-speech",
+        "../bin/click-to-talk",
         "../bin/ffmpeg",
         "../bin/ffprobe"
       ],
