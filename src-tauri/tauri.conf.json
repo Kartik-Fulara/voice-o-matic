@@ -146,7 +146,7 @@
         "title": "Voice-o-Matic",
         "label": "main",
         "width": 1000,
-        "minWidth": 420,
+        "minWidth": 750,
         "minHeight": 600,
         "height": 600,
         "resizable": true,

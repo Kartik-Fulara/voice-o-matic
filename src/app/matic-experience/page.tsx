@@ -4,7 +4,6 @@ import { SendHorizontal, ChevronRight, DownloadCloud, Pause, Play, PlusCircle, S
 import { InputWithButton } from '@components/ui/input'
 import { CSSTransition } from "react-transition-group"
 import { Button } from '@components/ui/button'
-
 import MaticExperienceNavBar from "@components/MaticExperienceNavBar"
 import handleTTS from '@/helper/handleTTS'
 import dynamic from 'next/dynamic'
@@ -16,6 +15,7 @@ const AudioWrapper = dynamic(() => import('@/components/AudioWrapper'), {
     ssr: false,
 })
 import { getData } from '@/helper/handleStore'
+import { WebviewWindow } from "@tauri-apps/api/window"
 
 let audioTimeInit = {
     currentTime: `00`,
@@ -27,12 +27,21 @@ const Page = () => {
 
     const [selectedCollection, setSelectedCollection] = useState<any>(state?.selectedCollection || "Default_Collection")
 
+    const maticWindow = WebviewWindow.getByLabel("maticExperience")
 
     useEffect(() => {
         getData("collectionData").then((res) => {
+            console.log(res)
             setState(res)
         })
     }, [])
+
+    useEffect(() => {
+        getData("collectionData").then((res) => {
+            console.log(res)
+            setState(res)
+        })
+    }, [maticWindow?.isVisible()])
 
 
     const [inputValue, setInputValue] = React.useState('')
