@@ -169,7 +169,7 @@ const OtherItems = ({ collections, addItem, setAddItem, setDeleteItem }: OtherIt
                                         {item.name}
                                     </Label>
                                     <div className='flex items-center justify-center gap-3'>
-                                        {(audioTime?.duration !== `00` && playingAudio === (item.audioUrl ?? item.downloadUrl)) && <div className='flex gap-2 items-center'>
+                                        {(audioTime?.duration !== `00` && playingAudio === (item.audioUrl || item.downloadUrl)) && <div className='flex gap-2 items-center'>
                                             <span>
                                                 {audioTime?.currentTime}
                                             </span>
@@ -181,23 +181,6 @@ const OtherItems = ({ collections, addItem, setAddItem, setDeleteItem }: OtherIt
                                             </span>
                                         </div>}
                                         <TooltipProvider>
-                                            {!item.isLocal ? (<Tooltip>
-                                                <TooltipTrigger onClick={() => addToDownload(item.downloadUrl as string, item.name, item.id)}>
-                                                    <DownloadCloud size={18} className='text-slate-300 hover:text-green-500' />
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    Download {item.name} Audio
-                                                </TooltipContent>
-                                            </Tooltip>) : (
-                                                <Tooltip>
-                                                    <TooltipTrigger onClick={() => handleTextToTalk({ audioPath: item.audioUrl as string })}>
-                                                        <Speech size={18} className='text-slate-300 hover:text-green-700' />
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        Speak {item.name} Audio
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            )}
                                             {playingAudio === "" && (<Tooltip>
                                                 <TooltipTrigger onClick={() => {
                                                     setAddItem(false)
@@ -214,7 +197,7 @@ const OtherItems = ({ collections, addItem, setAddItem, setDeleteItem }: OtherIt
                                                 </TooltipContent>
                                             </Tooltip>
                                             )}
-                                            {playingAudio === (item.audioUrl ?? item.downloadUrl) && (
+                                            {playingAudio === (item.audioUrl || item.downloadUrl) && (
                                                 <Tooltip>
                                                     <TooltipTrigger onClick={() => {
                                                         removePlayingAudio()
@@ -223,6 +206,23 @@ const OtherItems = ({ collections, addItem, setAddItem, setDeleteItem }: OtherIt
                                                     </TooltipTrigger>
                                                     <TooltipContent>
                                                         Pause {item.name} Audio
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            )}
+                                            {!item.isLocal ? (<Tooltip>
+                                                <TooltipTrigger onClick={() => addToDownload(item.downloadUrl as string, item.name, item.id)}>
+                                                    <DownloadCloud size={18} className='text-slate-300 hover:text-green-500' />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    Download {item.name} Audio
+                                                </TooltipContent>
+                                            </Tooltip>) : (
+                                                <Tooltip>
+                                                    <TooltipTrigger onClick={() => handleTextToTalk({ audioPath: item.audioUrl as string })}>
+                                                        <Speech size={18} className='text-slate-300 hover:text-green-700' />
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        Speak {item.name} Audio
                                                     </TooltipContent>
                                                 </Tooltip>
                                             )}

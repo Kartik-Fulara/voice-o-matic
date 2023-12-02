@@ -15,7 +15,7 @@ const AudioWrapper = dynamic(() => import('@/components/AudioWrapper'), {
     ssr: false,
 })
 import { getData } from '@/helper/handleStore'
-import { WebviewWindow } from "@tauri-apps/api/window"
+// import { WebviewWindow } from "@tauri-apps/api/window"
 
 let audioTimeInit = {
     currentTime: `00`,
@@ -26,23 +26,6 @@ const Page = () => {
     const [state, setState] = useState<any>([])
 
     const [selectedCollection, setSelectedCollection] = useState<any>(state?.selectedCollection || "Default_Collection")
-
-    const maticWindow = WebviewWindow.getByLabel("maticExperience")
-
-    useEffect(() => {
-        getData("collectionData").then((res) => {
-            console.log(res)
-            setState(res)
-        })
-    }, [])
-
-    useEffect(() => {
-        getData("collectionData").then((res) => {
-            console.log(res)
-            setState(res)
-        })
-    }, [maticWindow?.isVisible()])
-
 
     const [inputValue, setInputValue] = React.useState('')
 
@@ -74,7 +57,7 @@ const Page = () => {
                     {collectionItems.map((item: any) => {
                         return (
                             <div key={item.audioUrl} className='flex items-center justify-center gap-3'>
-                                {(audioTime?.duration !== `00` && playingAudio === (item.audioUrl || item.downloadUrl)) && <div className='flex gap-2 items-center'>
+                                {(audioTime?.duration !== `00` && playingAudio === (item.downloadUrl || item.audioUrl)) && <div className='flex gap-2 items-center'>
                                     <span>
                                         {audioTime?.currentTime}
                                     </span>
@@ -99,7 +82,6 @@ const Page = () => {
                                         <TooltipTrigger onClick={() => {
                                             if (item.audioUrl === "") {
                                                 setPlayingAudio(item.downloadUrl as string)
-                                                return
                                             } else {
                                                 setPlayingAudio(item.audioUrl as string)
                                             }
@@ -111,7 +93,7 @@ const Page = () => {
                                         </TooltipContent>
                                     </Tooltip>
                                     )}
-                                    {playingAudio === (item.audioUrl || item.downloadUrl) && (
+                                    {playingAudio === (item.downloadUrl || item.audioUrl) && (
                                         <Tooltip>
                                             <TooltipTrigger onClick={() => {
                                                 setPlayingAudio("")
@@ -130,13 +112,11 @@ const Page = () => {
                     }
                 </>
             ) : (
-                <>
-                    <div className='w-full flex h-[40px] justify-between items-center px-4'>
+                <div className='w-full flex h-[40px] justify-between items-center px-4'>
                         <Label className='flex text-[20px] w-full items-center justify-center font-bold'>
                             No items found (Add Or Download Audios)
                         </Label>
                     </div>
-                </>
             )}
 
             <section className='w-full flex justify-start items-start pl-[26px]'>

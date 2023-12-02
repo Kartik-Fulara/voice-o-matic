@@ -127,12 +127,12 @@ export default function Page() {
   //   }
   // }
 
-  useEffect(() => {
-    // downloadHandler()
-    // let baseUrl = localStorage.getItem("BASE_DIR");
-    // console.log(baseUrl)
-    console.log(audioState.downloadingAudio)
-  }, [audioState])
+  // useEffect(() => {
+  //   // downloadHandler()
+  //   // let baseUrl = localStorage.getItem("BASE_DIR");
+  //   // console.log(baseUrl)
+  //   console.log(audioState.downloadingAudio)
+  // }, [audioState])
 
   return (
     <>

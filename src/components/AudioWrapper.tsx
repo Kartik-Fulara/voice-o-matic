@@ -76,10 +76,17 @@ const AudioWrapper = ({
 
     }
 
+    function convertSrc(playingAudio: string) {
+        if (playingAudio.startsWith("https://res.cloudinary.com/duv59yta1/video/upload/")) {
+            return playingAudio;
+        }
+        return convertFileSrc(playingAudio)
+    }
+
     return (
         <audio
             key={playingAudio}
-            src={convertFileSrc(playingAudio)}
+            src={convertSrc(playingAudio)}
             autoPlay
             hidden
 
