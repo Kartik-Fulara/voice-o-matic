@@ -34,7 +34,7 @@
             "sidecar": true
           },
           {
-            "name": "../bin/click-to-talk.exe",
+            "name": "../bin/click-to-talk",
             "sidecar": true,
             "args": true
           }

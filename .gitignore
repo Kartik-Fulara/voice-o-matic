@@ -13,7 +13,8 @@
 /out/
 
 # production
-/build
+build
+dist
 
 # misc
 .DS_Store
@@ -41,3 +42,4 @@ rough.*
 rough/**/*
 # reject exe files
 *.exe
+*.spec

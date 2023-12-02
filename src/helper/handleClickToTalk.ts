@@ -2,7 +2,7 @@ import { Command } from "@tauri-apps/api/shell";
 const handleClickToTalk = async ({ audioPath }: { audioPath: string }) => {
   let selectedMicrophone = localStorage.getItem("CABLE_ID") as string;
 
-  const command = Command.sidecar("../bin/click-to-talk.exe", [
+  const command = Command.sidecar("../bin/click-to-talk", [
     selectedMicrophone.toString(),
     audioPath,
   ]);
